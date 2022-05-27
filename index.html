@@ -4,39 +4,65 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/style.css">  
+  <link rel="stylesheet" href="./styles/style.css"> 
   <script src="https://kit.fontawesome.com/1db2702c51.js" crossorigin="anonymous"></script>
   <title>Timer</title>
 </head>
 <body>
   <div class="layout">
-    <header></header>
+    <header>
+      <nav class="header--nav">
+        <ul>
+          <li>
+            <button class="header--button">
+              <span> <i class="fa-solid fa-hourglass"></i> </span>
+            </button>
+          </li>
+          <li>
+            <button class="header--button">
+              <span> <i class="fa-solid fa-clock"></i> </span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
     <main class="timer--container">
-      <h3> Timer </h3>
+      <h1> Timer </h1>
       <p class="timer">
         <span id="hours">00</span>:<span id="minuts">00</span>:<span id="seconds">00</span>
       </p>
 
-      <button id="pause-button" class="timer--button timer--button__hiden" onclick="onClickPlayPause()"> 
-        <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
-      </button>
-
-      <button id="play-button" class="timer--button" onclick="onClickPlayPause()"> 
-        <span> <i id="play-pause" class="fa-solid fa-play"></i> </span>
-      </button>
-
-      <button class="timer--button" onclick="onClickStop()"> 
-        <span> <i class="fa-solid fa-stop"></i> </span>
-      </button>
-
-      <button class="timer--button" onclick="onClickRestart()"> 
-        <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
-      </button>
+      <section class="timer-buttons--container">
+        <button id="pause-button" class="timer--button timer--button__hiden" onclick="onClickPlayPause()"> 
+          <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
+        </button>
+  
+        <button id="play-button" class="timer--button" onclick="onClickPlayPause()"> 
+          <span> <i id="play-pause" class="fa-solid fa-play"></i> </span>
+        </button>
+  
+        <button class="timer--button" onclick="onClickStop()"> 
+          <span> <i class="fa-solid fa-stop"></i> </span>
+        </button>
+  
+        <button class="timer--button" onclick="onClickRestart()"> 
+          <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
+        </button>
+      </section>
     </main>
 
-    <footer></footer>
-
+    <footer>
+      <p> Made with &#128156; by Pahoalapizco</p>
+      <div class="social-media--container">
+        <a href="https://www.github.com/pahoalapizco" target="_blank">
+          <span> <i class="fa-brands fa-github"></i> </span>
+        </a>
+        <a href="https://www.linkedin.com/in/pahoalapizco/" target="_blank">
+          <span> <i class="fa-brands fa-linkedin"></i> </span>
+        </a>
+      </div>
+    </footer>
   </div>
 
   <script src="./js/index.js"></script>
