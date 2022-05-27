@@ -11,23 +11,22 @@
 </head>
 <body>
   <div class="principal">
-
     <div class="layout">
       <header>
         <nav class="header--nav">
           <ul>
             <li>
-              <button class="header--button active">
+              <button id="time-chronometer" class="header--button active" onclick="onClickChronometer()">
                 <span> <i class="fa-solid fa-hourglass"></i> </span>
               </button>
             </li>
             <li>
-              <button class="header--button">
+              <button  id="time-timer" class="header--button" onclick="onClickTimer()">
                 <span> <i class="fa-solid fa-clock"></i> </span>
               </button>
             </li>
             <li>
-              <button class="header--button">
+              <button  id="time-pomodoro" class="header--button" onclick="onClickPomodoro()">
                 <span> <i class="fa-solid fa-bell"></i> </span>
               </button>
             </li>
@@ -36,7 +35,7 @@
       </header>
   
       <main>
-        <h1> Chronometer </h1>
+        <h1 id="timer-tittle"> Chronometer </h1>
         <p class="timer">
           <span id="hours">00</span>:<span id="minuts">00</span>:<span id="seconds">00</span><span id="miliseconds">00</span>
         </p>
@@ -70,10 +69,10 @@
           </a>
         </div>
       </footer>
-  
     </div>
   </div>
 
   <script src="./js/index.js"></script>
+  <script src="./js/chronometer.js"></script>
 </body>
 </html>
