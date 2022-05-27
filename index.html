@@ -13,10 +13,26 @@
     <header></header>
 
     <main class="timer--container">
-      <h1> Timer </h1>
+      <h3> Timer </h3>
       <p class="timer">
         <span id="hours">00</span>:<span id="minuts">00</span>:<span id="seconds">00</span>
       </p>
+
+      <button id="pause-button" class="timer--button timer--button__hiden" onclick="onClickPlayPause()"> 
+        <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
+      </button>
+
+      <button id="play-button" class="timer--button" onclick="onClickPlayPause()"> 
+        <span> <i id="play-pause" class="fa-solid fa-play"></i> </span>
+      </button>
+
+      <button class="timer--button" onclick="onClickStop()"> 
+        <span> <i class="fa-solid fa-stop"></i> </span>
+      </button>
+
+      <button class="timer--button" onclick="onClickRestart()"> 
+        <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
+      </button>
     </main>
 
     <footer></footer>
