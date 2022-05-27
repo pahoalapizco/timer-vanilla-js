@@ -1,6 +1,7 @@
 const spanHours = document.getElementById("hours");
 const spanMinutes = document.getElementById("minuts");
 const spanSeconds = document.getElementById("seconds");
+const milisecondsSpan = document.getElementById("miliseconds");
 const playButton = document.getElementById('play-button');
 const pauseButton = document.getElementById('pause-button');
 
@@ -8,6 +9,8 @@ let timeInterval;
 let hoursValue = 0,
     minutesValue = 0
     secondsValue = 0;
+    milisecondsValue = 0;
+
 let play = true;
 let newPlay = true;
 
@@ -17,10 +20,12 @@ const reset = () => {
     hoursValue = 0,
     minutesValue = 0
     secondsValue = 0;
+    milisecondsValue = 0;
   
     spanHours.textContent = '00';
     spanMinutes.textContent = '00';
     spanSeconds.textContent = '00';
+    milisecondsSpan.textContent = '00';
   }
 };
 
@@ -32,9 +37,15 @@ const clearTimerInterval = () => {
 
 const start = () => {
   timeInterval = setInterval(() => {
-    secondsValue++;
-    spanSeconds.textContent = format(secondsValue);
+    milisecondsValue++;
+    milisecondsSpan.textContent = format(milisecondsValue);
     
+    if(milisecondsValue === 60) {
+      milisecondsValue = 0;
+      secondsValue++;
+      spanSeconds.textContent = format(secondsValue);
+    }
+
     if(secondsValue === 60) {
       secondsValue = 0;
       minutesValue++;
@@ -45,8 +56,7 @@ const start = () => {
       hoursValue++,
       spanHours.textContent = format(hoursValue);
     }
-
-  }, 1000);
+  }, 100);
 }
 const removeAddClasses = (showPlay = true) => {
   if(showPlay) {
