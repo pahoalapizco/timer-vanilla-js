@@ -1,0 +1,33 @@
+.principal {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.layout {
+  width: 600px;
+  height: auto;
+  padding: 50px;
+  border-radius: 10px;
+  background-color: #191c27;
+}
+
+.timer {
+  font-size: 6rem;
+}
+
+.timer span:nth-child(4) {
+  font-size: 3.5rem;
+}
+
+.timer--button {
+  width: 70px;
+  height: 70px;
+  font-size: 4rem;
+}
+
+footer {
+  font-size: 2rem;
+}
