@@ -53,48 +53,8 @@
           </nav>
         </header>
 
-        <main id="timer--container">
-          <h1>Timer</h1>
-          <p class="timer"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><span id="miliseconds" hidden>00</span>
-          </p>
-          <form class="timer--form" action="">
-            <label for="inpHour"></label>
-            <input type="number" name="hours" id="inpHour" placeholder="00" max="24" min="0">
-            <span>:</span>
-            <label for="inpMinutes"></label>
-            <input type="number" name="minutes" id="inpMinutes" placeholder="00" max="59" min="0">
-            <span>:</span>
-            <label for="inpSeconds"></label>
-            <input type="number" name="seconds" id="inpSeconds" placeholder="00" max="59" min="0">
-          </form>
-
-          <section class="timer-buttons--container">
-            <button
-              id="pause-button"
-              class="timer--button timer--button__hiden"
-              onclick="onClickPlayPauseTimer()"
-            >
-              <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
-            </button>
-
-            <button
-              id="play-button"
-              class="timer--button"
-              onclick="onClickPlayPauseTimer()"
-            >
-              <span> <i id="play-pause" class="fa-solid fa-play"></i> </span>
-            </button>
-
-            <button class="timer--button" onclick="onClickStop()">
-              <span> <i class="fa-solid fa-stop"></i> </span>
-            </button>
-
-            <button class="timer--button" onclick="onClickRestart()">
-              <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
-            </button>
-          </section>
-          
-          <!-- <h1>Chronometer</h1>
+        <main id="timer--container">          
+          <h1>Chronometer</h1>
           <p class="timer"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><span id="miliseconds">00</span>
           </p>
 
@@ -122,7 +82,7 @@
             <button class="timer--button" onclick="onClickRestart()">
               <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
             </button>
-          </section> -->
+          </section>
         </main>
         <footer>
           <p>Made with &#128156; by Pahoalapizco</p>

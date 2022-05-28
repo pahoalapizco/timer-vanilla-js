@@ -222,18 +222,17 @@ const onClickTimer = () => {
 
   container.innerHTML = `
   <h1>Timer</h1>
-  <p class="timer"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><span id="miliseconds" hidden>00</span>
+  <p class="timer"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
   </p>
-
   <form class="timer--form" action="">
     <label for="inpHour"></label>
     <input type="number" name="hours" id="inpHour" placeholder="00" max="24" min="0">
     <span>:</span>
     <label for="inpMinutes"></label>
-    <input type="number" name="minutes" id="inpMinutes" placeholder="00" max="60" min="0">
+    <input type="number" name="minutes" id="inpMinutes" placeholder="00" max="59" min="0">
     <span>:</span>
     <label for="inpSeconds"></label>
-    <input type="number" name="seconds" id="inpSeconds" placeholder="00" max="60" min="0">
+    <input type="number" name="seconds" id="inpSeconds" placeholder="00" max="59" min="0">
   </form>
 
   <section class="timer-buttons--container">
@@ -256,10 +255,6 @@ const onClickTimer = () => {
     <button class="timer--button" onclick="onClickStop()">
       <span> <i class="fa-solid fa-stop"></i> </span>
     </button>
-
-    <button class="timer--button" onclick="onClickRestart()">
-      <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
-    </button>
   </section>
   `;
   resetItems();
@@ -269,4 +264,5 @@ const onClickPomodoro = () => {
   btnPomodoro.classList.add('active');
   btnTimer.classList.remove('active');
   btnChronometer.classList.remove('active');
+  container.innerHTML = `<h1> 404 NOT FOUND :( </h1>`
 }
