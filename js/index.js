@@ -13,6 +13,11 @@ let milisecondsSpan = document.getElementById("miliseconds");
 let playButton = document.getElementById('play-button');
 let pauseButton = document.getElementById('pause-button');
 
+// Timer
+let inputHours = document.getElementById("inpHour");
+let inputMinutes = document.getElementById("inpMinutes");
+let inputSeconds = document.getElementById("inpSeconds");
+
 let timeInterval;
 let hoursValue = 0,
     minutesValue = 0
@@ -35,7 +40,10 @@ const reset = () => {
     spanHours.textContent = '00';
     spanMinutes.textContent = '00';
     spanSeconds.textContent = '00';
-    milisecondsSpan.textContent = '00';
+
+    if(milisecondsSpan) {
+      milisecondsSpan.textContent = '00';
+    }
   }
 };
 
@@ -81,9 +89,9 @@ const removeAddClasses = (showPlay = true) => {
   }
 }
 
-const startTimerInterval = () => {      
+const startTimerInterval = () => {
   secondsValue--;
-  spanSeconds.textContent = format(secondsValue);
+  spanSeconds.textContent = secondsValue < 0 ? "59" : format(secondsValue);
 
   if(hoursValue === 0 && minutesValue === 0 && secondsValue === 0) {     
     play = true; 
@@ -92,13 +100,13 @@ const startTimerInterval = () => {
     return;
   }
 
-  if(secondsValue === 0) {
-    secondsValue = 60;
+  if(secondsValue < 0) {
+    secondsValue = 59;
     minutesValue--;
     spanMinutes.textContent = format(minutesValue);
   }
-  if(minutesValue === 0 && hoursValue > 0) {
-    minutesValue = 60;
+  if(minutesValue < 0 && hoursValue > 0) {
+    minutesValue = 59;
     hoursValue--,
     spanHours.textContent = format(hoursValue);
   }
@@ -132,13 +140,19 @@ const onClickRestart = () => {
 }
 
 const onClickPlayPauseTimer = () => {
-  console.log('entro al play pause timer')
+  
   if(play) {
-    // reset();    
-    hoursValue = 0;
-    minutesValue = 0;
-    secondsValue = 5;
+    reset();
+    hoursValue = parseInt(inputHours.value) || 0;
+    minutesValue = parseInt(inputMinutes.value) || 0;
+    secondsValue = parseInt(inputSeconds.value) || 0;
     interval = 1000;
+
+    if(hoursValue === 0 && minutesValue === 0 && secondsValue === 0) return;
+
+    spanHours.textContent = format(hoursValue);
+    spanMinutes.textContent = format(minutesValue);
+    spanSeconds.textContent = format(secondsValue);
 
     start(startTimerInterval);
     newPlay = true;
@@ -150,17 +164,20 @@ const onClickPlayPauseTimer = () => {
   removeAddClasses(play);
 }
 
-const resetItems = (value) => {
-  // Chronometer  
-  if(value !== 1)
-  {
-    spanHours = document.getElementById("hours");
-    spanMinutes = document.getElementById("minutes");
-    spanSeconds = document.getElementById("seconds");
-    milisecondsSpan = document.getElementById("miliseconds");
-    playButton = document.getElementById('play-button');
-    pauseButton = document.getElementById('pause-button');
-  }
+const resetItems = () => {
+  // Chronometer 
+  spanHours = document.getElementById("hours");
+  spanMinutes = document.getElementById("minutes");
+  spanSeconds = document.getElementById("seconds");
+  milisecondsSpan = document.getElementById("miliseconds");
+  playButton = document.getElementById('play-button');
+  pauseButton = document.getElementById('pause-button');
+
+  // Timer
+  inputHours = document.getElementById("inpHour");
+  inputMinutes = document.getElementById("inpMinutes");
+  inputSeconds = document.getElementById("inpSeconds");
+
   onClickStop();
 }
 
@@ -204,30 +221,48 @@ const onClickTimer = () => {
   interval = 1000;
 
   container.innerHTML = `
-    <h1>Timer</h1>
-    <p class="timer">
-      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">18</span><span id="miliseconds" hidden>00</span>
-    </p>
+  <h1>Timer</h1>
+  <p class="timer"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><span id="miliseconds" hidden>00</span>
+  </p>
 
-    <section class="timer-buttons--container">
-      <button id="pause-button" class="timer--button timer--button__hiden" onclick="onClickPlayPauseTimer()"> 
-        <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
-      </button>
+  <form class="timer--form" action="">
+    <label for="inpHour"></label>
+    <input type="number" name="hours" id="inpHour" placeholder="00" max="24" min="0">
+    <span>:</span>
+    <label for="inpMinutes"></label>
+    <input type="number" name="minutes" id="inpMinutes" placeholder="00" max="60" min="0">
+    <span>:</span>
+    <label for="inpSeconds"></label>
+    <input type="number" name="seconds" id="inpSeconds" placeholder="00" max="60" min="0">
+  </form>
 
-      <button id="play-button" class="timer--button" onclick="onClickPlayPause()"> 
-        <span> <i id="play-pause" class="fa-solid fa-play"></i> </span>
-      </button>
+  <section class="timer-buttons--container">
+    <button
+      id="pause-button"
+      class="timer--button timer--button__hiden"
+      onclick="onClickPlayPauseTimer()"
+    >
+      <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
+    </button>
 
-      <button class="timer--button" onclick="onClickStop()"> 
-        <span> <i class="fa-solid fa-stop"></i> </span>
-      </button>
+    <button
+      id="play-button"
+      class="timer--button"
+      onclick="onClickPlayPauseTimer()"
+    >
+      <span> <i id="play-pause" class="fa-solid fa-play"></i> </span>
+    </button>
 
-      <button class="timer--button" onclick="onClickRestart()"> 
-        <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
-      </button>
-    </section>
+    <button class="timer--button" onclick="onClickStop()">
+      <span> <i class="fa-solid fa-stop"></i> </span>
+    </button>
+
+    <button class="timer--button" onclick="onClickRestart()">
+      <span> <i class="fa-solid fa-arrow-rotate-left"></i> </span>
+    </button>
+  </section>
   `;
-  resetItems(0);
+  resetItems();
 }
 
 const onClickPomodoro = () => {
