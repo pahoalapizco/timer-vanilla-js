@@ -7,7 +7,7 @@ const container = document.getElementById("timer--container");
 
 // Chronometer
 let spanHours = document.getElementById("hours");
-let spanMinutes = document.getElementById("minuts");
+let spanMinutes = document.getElementById("minutes");
 let spanSeconds = document.getElementById("seconds");
 let milisecondsSpan = document.getElementById("miliseconds");
 let playButton = document.getElementById('play-button');
@@ -23,10 +23,6 @@ let play = true;
 let newPlay = true;
 
 let interval = 100;
-// Reverse trimer
-let revHours = 0,
-    revMinuts = 1;
-    revSeconds = 18;
 
 const format = (value) => ('0'+value).slice(-2);
 const reset = () => {  
@@ -48,7 +44,8 @@ const clearTimerInterval = () => {
     clearInterval(timeInterval);
   }
 }
-const cbChronometerInterval = () => {
+
+const startChronometerInterval = () => {
   milisecondsValue++;
   milisecondsSpan.textContent = format(milisecondsValue);
   
@@ -73,29 +70,6 @@ const start = (cb) => {
   timeInterval = setInterval(cb, interval);
 }
 
-const startTimer = () => {
-  timeInterval = setInterval(() => {
-    milisecondsValue++;
-    milisecondsSpan.textContent = format(milisecondsValue);
-    
-    if(milisecondsValue === 60) {
-      milisecondsValue = 0;
-      secondsValue++;
-      spanSeconds.textContent = format(secondsValue);
-    }
-
-    if(secondsValue === 60) {
-      secondsValue = 0;
-      minutesValue++;
-      spanMinutes.textContent = format(minutesValue);
-    }
-    if(minutesValue === 60) {
-      minutesValue = 0;
-      hoursValue++,
-      spanHours.textContent = format(hoursValue);
-    }
-  }, 100);
-}
 
 const removeAddClasses = (showPlay = true) => {
   if(showPlay) {
@@ -107,10 +81,33 @@ const removeAddClasses = (showPlay = true) => {
   }
 }
 
+const startTimerInterval = () => {      
+  secondsValue--;
+  spanSeconds.textContent = format(secondsValue);
+
+  if(hoursValue === 0 && minutesValue === 0 && secondsValue === 0) {     
+    play = true; 
+    removeAddClasses(play);
+    clearTimerInterval();
+    return;
+  }
+
+  if(secondsValue === 0) {
+    secondsValue = 60;
+    minutesValue--;
+    spanMinutes.textContent = format(minutesValue);
+  }
+  if(minutesValue === 0 && hoursValue > 0) {
+    minutesValue = 60;
+    hoursValue--,
+    spanHours.textContent = format(hoursValue);
+  }
+}
+
 const onClickPlayPause = () => {
   if(play) {
     reset();
-    start(cbChronometerInterval, 100);
+    start(startChronometerInterval, 100);
     newPlay = true;
   } else {
     clearTimerInterval();
@@ -131,17 +128,39 @@ const onClickRestart = () => {
   removeAddClasses(false);
   clearTimerInterval();
   reset();
-  start(cbChronometerInterval, 100);
+  start(startChronometerInterval, 100);
 }
 
-const resetItems = () => {
+const onClickPlayPauseTimer = () => {
+  console.log('entro al play pause timer')
+  if(play) {
+    // reset();    
+    hoursValue = 0;
+    minutesValue = 0;
+    secondsValue = 5;
+    interval = 1000;
+
+    start(startTimerInterval);
+    newPlay = true;
+  } else {
+    clearTimerInterval();
+    newPlay = false;
+  }
+  play = !play;
+  removeAddClasses(play);
+}
+
+const resetItems = (value) => {
   // Chronometer  
-  spanHours = document.getElementById("hours");
-  spanMinutes = document.getElementById("minuts");
-  spanSeconds = document.getElementById("seconds");
-  milisecondsSpan = document.getElementById("miliseconds");
-  playButton = document.getElementById('play-button');
-  pauseButton = document.getElementById('pause-button');
+  if(value !== 1)
+  {
+    spanHours = document.getElementById("hours");
+    spanMinutes = document.getElementById("minutes");
+    spanSeconds = document.getElementById("seconds");
+    milisecondsSpan = document.getElementById("miliseconds");
+    playButton = document.getElementById('play-button');
+    pauseButton = document.getElementById('pause-button');
+  }
   onClickStop();
 }
 
@@ -154,7 +173,7 @@ const onClickChronometer = () => {
   container.innerHTML = `
     <h1>Chronometer</h1>
     <p class="timer">
-      <span id="hours">00</span>:<span id="minuts">00</span>:<span id="seconds">00</span><span id="miliseconds">00</span>
+      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><span id="miliseconds">00</span>
     </p>
 
     <section class="timer-buttons--container">
@@ -187,11 +206,11 @@ const onClickTimer = () => {
   container.innerHTML = `
     <h1>Timer</h1>
     <p class="timer">
-      <span id="hours">00</span>:<span id="minuts">00</span>:<span id="seconds">00</span>
+      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">18</span><span id="miliseconds" hidden>00</span>
     </p>
 
     <section class="timer-buttons--container">
-      <button id="pause-button" class="timer--button timer--button__hiden" onclick="onClickPlayPause()"> 
+      <button id="pause-button" class="timer--button timer--button__hiden" onclick="onClickPlayPauseTimer()"> 
         <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
       </button>
 
@@ -208,12 +227,11 @@ const onClickTimer = () => {
       </button>
     </section>
   `;
-  resetItems();
+  resetItems(0);
 }
 
 const onClickPomodoro = () => {
   btnPomodoro.classList.add('active');
   btnTimer.classList.remove('active');
   btnChronometer.classList.remove('active');
-
 }

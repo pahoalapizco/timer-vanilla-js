@@ -55,14 +55,14 @@
 
         <main id="timer--container">
           <h1>Timer</h1>
-          <p class="timer"><span id="hours">00</span>:<span id="minuts">00</span>:<span id="seconds">00</span><span id="miliseconds" hidden>00</span>
+          <p class="timer"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">18</span><span id="miliseconds" hidden>00</span>
           </p>
 
           <section class="timer-buttons--container">
             <button
               id="pause-button"
               class="timer--button timer--button__hiden"
-              onclick="onClickPlayPause()"
+              onclick="onClickPlayPauseTimer()"
             >
               <span> <i id="play-pause" class="fa-solid fa-pause"></i> </span>
             </button>
@@ -70,7 +70,7 @@
             <button
               id="play-button"
               class="timer--button"
-              onclick="onClickPlayPause()"
+              onclick="onClickPlayPauseTimer()"
             >
               <span> <i id="play-pause" class="fa-solid fa-play"></i> </span>
             </button>
@@ -85,7 +85,7 @@
           </section>
           
           <!-- <h1>Chronometer</h1>
-          <p class="timer"><span id="hours">00</span>:<span id="minuts">00</span>:<span id="seconds">00</span><span id="miliseconds">00</span>
+          <p class="timer"><span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span><span id="miliseconds">00</span>
           </p>
 
           <section class="timer-buttons--container">
