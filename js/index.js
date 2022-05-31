@@ -236,7 +236,7 @@ const onClickPlayPausePomodoro = () => {
     reset();
     minutesValue = TIME_TAKS;
     secondsValue = 0;
-    interval = 10;
+    interval = 1000;
 
     start(startPomodoroInterval);
     newPlay = true;
