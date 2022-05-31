@@ -111,7 +111,7 @@ const taskCompleted = (compleate) => {
     const position = totalCircles;
     pomodoroCircles[position].classList.add('pomodoro__completed');
   } else {
-    for(let i = 0; i < totalCircles; i++) {
+    for(let i = 0; i <= totalCircles; i++) {
       pomodoroCircles[i].classList.remove('pomodoro__completed');
     }
   }
@@ -211,9 +211,9 @@ const onClickRestart = () => {
 const onClickPlayPauseTimer = () => {  
   if(play) {
     reset();
-    hoursValue = parseInt(inputHours.value) || 0;
-    minutesValue = parseInt(inputMinutes.value) || 0;
-    secondsValue = parseInt(inputSeconds.value) || 0;
+    hoursValue = hoursValue || parseInt(inputHours.value) || 0;
+    minutesValue = minutesValue || parseInt(inputMinutes.value) || 0;
+    secondsValue = secondsValue || parseInt(inputSeconds.value) || 0;
     interval = 1000;
 
     if(hoursValue === 0 && minutesValue === 0 && secondsValue === 0) return;
